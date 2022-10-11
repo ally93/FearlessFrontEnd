@@ -1,37 +1,94 @@
+function createCard(name, description, pictureUrl) {
+    return `
+      <div class="card">
+        <img src="${pictureUrl}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">${name}</h5>
+          <p class="card-text">${description}</p>
+        </div>
+      </div>
+    `;
+  }
+
+
 window.addEventListener('DOMContentLoaded', async () => {
+
     const url = 'http://localhost:8000/api/conferences/';
-    
-    try{
-        const response = await fetch(url);
-
-        if(!response.ok){
-            console.log('Bad response buddy!');
-        } else{
-            const data = await response.json();
-
-            const conference = data.conferences[0];
-            const nameTag = document.querySelector('.card-title');
-            nameTag.innerHTML = conference.name;
-
-            
-
-            const detailUrl = `http://localhost:8000${conference.href}`;
-            const detailResponse = await fetch(detailUrl);
-            if (detailResponse.ok) {
-                const details = await detailResponse.json();
-                const description = details.conference.description;
-                const descriptionTag = document.querySelector('.card-text');
-                descriptionTag.innerHTML = description
-                console.log('details:::', details);
-
-                const imageTag = document.querySelector('.card-img-top');
-                imageTag.src = details.conference.location.picture_url;
-            }
-
-            
+  
+    try {
+      const response = await fetch(url);
+  
+      if (!response.ok) {
+        console.log('Bad response buddy!')
+      } else {
+        const data = await response.json();
+  
+        for (let conference of data.conferences) {
+          const detailUrl = `http://localhost:8000${conference.href}`;
+          const detailResponse = await fetch(detailUrl);
+          if (detailResponse.ok) {
+            const details = await detailResponse.json();
+            const title = details.conference.name;
+            const description = details.conference.description;
+            const pictureUrl = details.conference.location.picture_url;
+            const html = createCard(title, description, pictureUrl);
+            console.log(html);
+            const column = document.querySelector('.col');
+            column.innerHTML += html;
+          }
         }
+  
+      }
     } catch (e) {
         console.log('Got an error!');
     }
+  
+  });
 
-});
+
+
+
+
+
+
+
+
+  // window.addEventListener('DOMContentLoaded', async () => {
+//     const url = 'http://localhost:8000/api/conferences/';
+    
+//     try{
+//         const response = await fetch(url);
+
+//         if(!response.ok){
+//             console.log('Bad response buddy!');
+//         } else{
+//             const data = await response.json();
+
+//             for(let conference of data.conferences){}
+
+//             const conference = data.conferences[0];
+//             const nameTag = document.querySelector('.card-title');
+//             nameTag.innerHTML = conference.name;
+
+            
+
+//             const detailUrl = `http://localhost:8000${conference.href}`;
+//             const detailResponse = await fetch(detailUrl);
+//             if (detailResponse.ok) {
+//                 const details = await detailResponse.json();
+//                 const description = details.conference.description;
+//                 const descriptionTag = document.querySelector('.card-text');
+//                 descriptionTag.innerHTML = description
+//                 // console.log('details:::', details);
+
+//                 const imageTag = document.querySelector('.card-img-top');
+//                 imageTag.src = details.conference.location.picture_url;
+//             }
+
+            
+//         }
+//     } catch (e) {
+//         console.log('Got an error!');
+//     }
+
+// });
