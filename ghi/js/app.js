@@ -22,7 +22,10 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const description = details.conference.description;
                 const descriptionTag = document.querySelector('.card-text');
                 descriptionTag.innerHTML = description
-                
+                console.log('details:::', details);
+
+                const imageTag = document.querySelector('.card-img-top');
+                imageTag.src = details.conference.location.picture_url;
             }
 
             
