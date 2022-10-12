@@ -22,6 +22,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.log('Bad response buddy!')
       } else {
         const data = await response.json();
+
+        let index = 0;
   
         for (let conference of data.conferences) {
           const detailUrl = `http://localhost:8000${conference.href}`;
@@ -31,13 +33,15 @@ window.addEventListener('DOMContentLoaded', async () => {
             const title = details.conference.name;
             const description = details.conference.description;
             const pictureUrl = details.conference.location.picture_url;
+            // const location = details.conference.location.name;
+            // const starts = details.conference.starts;
+            // const ends = details.conference.ends;
             const html = createCard(title, description, pictureUrl);
-            console.log(html);
-            const column = document.querySelector('.col');
+            const column = document.querySelector(`#col-${index % 3}`);
             column.innerHTML += html;
+            index += 1;
           }
         }
-  
       }
     } catch (e) {
         console.log('Got an error!');
