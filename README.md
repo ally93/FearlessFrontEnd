@@ -14,4 +14,7 @@ making a new data, made a new html and new js to contain new data
 
 -It's almost always okay to have an API URL to get Value Objects. Just make sure that you only return its property values. Don't send back ids or hrefs." which means u can't use model encoders coz that will return href, and we dont need it. do a good old for loop
 
--
+-if u put active in the class, u make it black/bolder/standout to show what page you're in has to be a part of navbar
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="new-location.html">New Location</a>
+</li>
