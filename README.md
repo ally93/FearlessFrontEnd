@@ -7,3 +7,7 @@
 -detailResponse.json(); => takes json and makes it into js object;
 
 -What you never want to do for an API is remove a property, or change the shape of the data. Adding properties is usually not a big deal. It'll just add to our bandwidth cost. But, a URL shouldn't be that big of a deal."
+
+
+-------------------------------------------------------------------------------------------------
+making a new data, made a new html and new js to contain new data
