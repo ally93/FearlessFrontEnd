@@ -46,4 +46,42 @@ window.addEventListener('DOMContentLoaded', async () => {
         const somethingWrong = document.querySelector("#error");
         somethingWrong.innerHTML = newHTML;
     }
+
+    // attend form submit
+
+    const formTag = document.getElementById('create-attendee-form');
+    formTag.addEventListener('submit',async event => {
+        event.preventDefault();
+
+        const formData = new FormData(formTag);
+        const data = Object.fromEntries(formData);
+        const json = JSON.stringify(data);
+        console.log('json::: ', json);
+        console.log('data:', data, '  formData:  ', formData);
+        
+        const attendeeUrl = 'http://localhost:8001/api/attendees/';
+        const fetchConfig = {
+        method: "post",
+        body: json,
+        headers: {
+            'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(attendeeUrl, fetchConfig);
+        if (response.ok) {
+            formTag.reset();
+            const newAttendee = await response.json();
+
+            // remove the d-none from the success alert
+            let successTag = document.getElementById('success-message');
+            successTag.classList.remove('d-none');
+
+            // add d-none to the formtag
+            formTag.classList.add('d-none');
+            
+        }
+        
+    });
+
+
 });
