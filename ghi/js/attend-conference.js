@@ -56,8 +56,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         const formData = new FormData(formTag);
         const data = Object.fromEntries(formData);
         const json = JSON.stringify(data);
-        console.log('json::: ', json);
-        console.log('data:', data, '  formData:  ', formData);
+        // console.log('json::: ', json);
+        // console.log('data:', data, '  formData:  ', formData);
         
         const attendeeUrl = 'http://localhost:8001/api/attendees/';
         const fetchConfig = {
@@ -67,6 +67,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             'Content-Type': 'application/json',
             },
         };
+
+        console.log('fetchConfig:::', fetchConfig);
         const response = await fetch(attendeeUrl, fetchConfig);
         if (response.ok) {
             formTag.reset();
