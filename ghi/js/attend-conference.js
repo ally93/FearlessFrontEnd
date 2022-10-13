@@ -30,6 +30,14 @@ window.addEventListener('DOMContentLoaded', async () => {
             selectTag.appendChild(option);
         }
 
+        // Here, add the 'd-none' class to the loading icon
+        const loadingIconTag = document.getElementById('loading-conference-spinner');
+        loadingIconTag.classList.add("d-none");
+
+
+        // Here, remove the 'd-none' class from the select tag
+        selectTag.classList.remove("d-none");
+
       }
     } catch (e) {
         console.error('Got an error!');
@@ -38,34 +46,4 @@ window.addEventListener('DOMContentLoaded', async () => {
         const somethingWrong = document.querySelector("#error");
         somethingWrong.innerHTML = newHTML;
     }
-
-    // conferenceForm submit
-
-    const formTag = document.getElementById('create-presentation-form');
-    formTag.addEventListener('submit',async event => {
-        event.preventDefault();
-
-        const formData = new FormData(formTag);
-        const data = Object.fromEntries(formData);
-        const json = JSON.stringify(data);
-        console.log('json::: ', json);
-        console.log('data:', data, '  formData:  ', formData);
-        
-        const presentationUrl = 'http://localhost:8000' + data.conference + 'presentations/';
-        const fetchConfig = {
-        method: "post",
-        body: json,
-        headers: {
-            'Content-Type': 'application/json',
-            },
-        };
-        const response = await fetch(presentationUrl, fetchConfig);
-        if (response.ok) {
-            formTag.reset();
-            const newPresentation = await response.json();
-            
-        }
-        
-    });
-  
 });
