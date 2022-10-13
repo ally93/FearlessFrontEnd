@@ -27,3 +27,8 @@ CORS
 -malik=> Oh, I know what it is. 'CORS' stands for 'cross-origin resource sharing'. This happens because your Web page that is on localhost:3000 is making a request to localhost:8001. When that happens, the browser asks the server at localhost:8001 if it's okay to make that HTTP request. The server responds with information in the HTTP response headers about if it's okay." He leans forward and points to the error on your screen. "Here, it says there's no 'Access-Control-Allow-Origin' header on the response. Is this microservice you're using configured for CORS?"
 
 -add cors in the requirements.txt on microservices
+
+
+-DJWTO notes 
+-login requires normal form data, not json
+-The djwto does not do JSON POST requests.
