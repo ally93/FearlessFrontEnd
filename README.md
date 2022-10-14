@@ -64,3 +64,11 @@ react-attendees:
 -This is creating a new service from the Node.js image, again. The 'command' is what it should run when it starts. The 'npm start' is how we run the React application during development. The next line sets the working directory, which is where we're going to attach the directory that has the React app in it.
 -run docker-compose up
 -The volumes is doing that directory attachment. Inside the container, the app directory will be looking at the attendees directory that was just created in the ghi directory."The environment section, that tells the React development Web server to bind to all ports and run on port 3001."
+
+<!-- <img src={logo} className="App-logo" alt="logo" /> what is the slash at the end? -->
+"That's a part of JSX. If you have an HTML tag that doesn't have a close tag, you have to put that slash there."
+
+"In JavaScript, 'class' is a reserved word. You can't use it as a variable or anything. So, instead of using 'class', React uses 'className', because all of that JSX HTML-looking stuff gets turned into JavaScript."
+It gets turned into JavaScript. Then, React uses things like document.createElement to make the HTML for you."
+
+-
