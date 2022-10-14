@@ -32,3 +32,35 @@ CORS
 -DJWTO notes 
 -login requires normal form data, not json
 -The djwto does not do JSON POST requests.
+
+---------------------------------------------------------------------------------------------------------------
+REACT
+
+- in terminal run 
+docker run -it -w /app -v "$(pwd)/ghi:/app" node:latest npx create-react-app attendees
+
+explaination for the terminal code above
+"That is going to run the Docker image that has Node.js in it, the command-line JavaScript program. It's going to make the ghi directory the app directory inside the container. That's what the -v flag means. The -w flag sets the working directory for the container to use while it's running the command. The command that we're running is create-react-app, a tool used to make new React applications. Look in Visual Studio while this is happening," he prompts. "You can see inside the ghi directory that it has created an attendees directory inside there. If you expand that, you'll see all of the React stuff."
+
+"In the src directory," he continues, "that's where the source code is that you write for the React application. In the public directory, that's where the index.html file is that will be used to show the React application after its turned into JavaScript."
+
+-react is not js
+-JSX = JavaScript Extended. Extension so tht u can write what looks like HTML in JS
+
+
+-add the following code in yml file
+react-attendees:
+  image: node:latest
+  command: npm start
+  working_dir: /app
+  volumes:
+    - ./ghi/attendees:/app
+  environment:
+    - HOST=0.0.0.0
+    - PORT=3001
+  ports:
+    - "3001:3001"
+
+-This is creating a new service from the Node.js image, again. The 'command' is what it should run when it starts. The 'npm start' is how we run the React application during development. The next line sets the working directory, which is where we're going to attach the directory that has the React app in it.
+-run docker-compose up
+-The volumes is doing that directory attachment. Inside the container, the app directory will be looking at the attendees directory that was just created in the ghi directory."The environment section, that tells the React development Web server to bind to all ports and run on port 3001."

@@ -8,10 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
         method: 'post',
         body: new FormData(form),
         credentials: 'include',
-        // headers: {
-        //   'Content-Type': 'application/json',
-        // }
       };
+      
       const url = 'http://localhost:8000/login/';
       const response = await fetch(url, fetchOptions);
       if (response.ok) {
