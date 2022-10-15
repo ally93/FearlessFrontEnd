@@ -71,4 +71,5 @@ react-attendees:
 "In JavaScript, 'class' is a reserved word. You can't use it as a variable or anything. So, instead of using 'class', React uses 'className', because all of that JSX HTML-looking stuff gets turned into JavaScript."
 It gets turned into JavaScript. Then, React uses things like document.createElement to make the HTML for you."
 
--
+-COMPONENTS(the functions in React that return JSX)
+"What happens," he explains, "is that when you have the attendees attribute on the App in the index.js," he points to the line <App attendees={data.attendees}/>, "that sets a variable named 'attendees' to the value inside the curly braces. Then, that variable becomes a property on the props parameter that gets passed into the function. He points to the line drawn between the "attendees" at the top of the drawing to the "props.attendees" inside the curly braces on the bottom. "That's how you end up passing arguments to the React functions. 

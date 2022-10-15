@@ -16,6 +16,10 @@ class AttendeeListEncoder(ModelEncoder):
     properties = ["name"]
 
 
+    def get_extra_data(self, o):
+        return {'conference': o.conference.name}
+
+
 class AttendeeDetailEncoder(ModelEncoder):
     model = Attendee
     properties = [
