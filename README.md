@@ -81,3 +81,15 @@ It gets turned into JavaScript. Then, React uses things like document.createElem
 docker container prune -f
 docker-compose build
 docker-compose up
+
+----------------------------------------------------------------------------------------
+in LocationForm.js
+// we r creating a class here, which can have a state when its created. React takes care of creating the instance of that class for us. All react component classes needs a render method
+// render returns the jsx 
+<input xyz /> //look below for explaination
+ In HTML, we can have tags that don't have close tags, like the input tag and the link tag. But, in React, everything has to have a close tag. Or, you put this slash at the end of it." You show your teammate to change the > at the end of all three input tags to />. With each forward slash they put near the end of the tag, the red squiggly error indicators go away.
+
+-like u cant use class and have to use className instead, similarly 'for' is a reserved word in JavaScript, React elements use 'htmlFor' instead.
+
+-can't use hooks with class components. We're doing a class component, so no hooks."
+

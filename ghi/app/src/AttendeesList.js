@@ -1,7 +1,7 @@
 import Nav from "./Nav"
 import React from "react";
 
-function AttendeesList(attendees) {
+function AttendeesList(props) {
   return (
         <table className="table table-striped">
           <thead>
@@ -11,7 +11,7 @@ function AttendeesList(attendees) {
             </tr>
           </thead>
           <tbody>
-            {attendees.map(attendee => {
+            {props.attendees.map(attendee => {
               return (
                 <tr key={attendee.href}>
                   <td>{ attendee.name }</td>
