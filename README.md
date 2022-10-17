@@ -76,4 +76,8 @@ It gets turned into JavaScript. Then, React uses things like document.createElem
 
 -dont use class, use className
 
--
+
+-imp docker commands
+docker container prune -f
+docker-compose build
+docker-compose up
