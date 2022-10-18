@@ -7,15 +7,25 @@ class LocationForm extends React.Component {
         super(props)
         this.state = {states: []};
         this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleRoomCount = this.handleRoomCount.bind(this);
+        this.handleRoomCountChange = this.handleRoomCountChange.bind(this);
+        this.handleCityChange = this.handleCityChange.bind(this);
+        this.handleStateChange = this.handleStateChange.bind(this);
     }
 
     handleNameChange(event){
         this.setState({name : event.target.value})
       }
 
-    handleRoomCount(event){
+    handleRoomCountChange(event){
         this.setState({roomCount: event.target.value})
+    }
+
+    handleCityChange(event){
+        this.setState({city: event.target.value})
+    }
+
+    handleStateChange(event){
+        this.setState({state: event.target.value})
     }
 
 
@@ -47,15 +57,15 @@ class LocationForm extends React.Component {
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={this.handleRoomCount} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
+                                <input onChange={this.handleRoomCountChange} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
                                 <label htmlFor="room_count">Room count</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input placeholder="City" required type="text" name="city" id="city" className="form-control"/>
+                                <input onChange={this.handleCityChange} placeholder="City" required type="text" name="city" id="city" className="form-control"/>
                                 <label htmlFor="city">City</label>
                             </div>
                             <div className="mb-3">
-                                <select required id="state" name="state" className="form-select">
+                                <select onChange={this.handleStateChange} required id="state" name="state" className="form-select">
                                     <option value="">Choose a state</option>
                                     {this.state.states.map(state => {
                                         return (
