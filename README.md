@@ -105,3 +105,5 @@ eg code :
 ... What's that triple dot thing?" you ask.
 
 "That copies all of the properties and values from this.state into a new object. It's an easy way to make a copy of objects in JavaScript. Then, we're creating a new key named 'room_count' and setting it to the value of 'roomCount'. Then, we're deleting the keys 'roomCount' and 'states' because I'm guessing we don't want to send that data to the server. It's just JavaScript object manipulation."
+
+-right click and format document to solve indent html issue 

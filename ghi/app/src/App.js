@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import LocationForm from "./LocationForm";
 import ConferenceForm from "./ConferenceForm";
 import AttendConferenceForm from "./AttendConferenceForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 
@@ -12,15 +13,27 @@ function App(props) {
     return null;
   }
   return (
-    <React.Fragment>
+    <BrowserRouter>
       <Nav />
       <div className="container">
-      <AttendConferenceForm />
+        <Routes>
+          <Route path="locations">
+            <Route path="new" element={<LocationForm />} />
+          </Route>
+          <Route path="conferences">
+            <Route path="new" element={<ConferenceForm />} />
+          </Route>
+          <Route path="attendees">
+            <Route path="" element={<AttendeesList />} />
+            <Route path="new" element={<AttendConferenceForm />} />
+          </Route>
+        </Routes>
+      {/* <AttendConferenceForm /> */}
         {/* <ConferenceForm /> */}
         {/* <LocationForm /> */}
         {/* <AttendeesList attendees={props.attendees}/> */}
       </div>
-  </React.Fragment>
+  </BrowserRouter>
   );
 }
 
