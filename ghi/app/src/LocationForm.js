@@ -10,6 +10,17 @@ class LocationForm extends React.Component {
         this.handleRoomCountChange = this.handleRoomCountChange.bind(this);
         this.handleCityChange = this.handleCityChange.bind(this);
         this.handleStateChange = this.handleStateChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+        //copying the state by utilizing 3 dots
+        const data = {...this.state};
+        data.room_count = data.roomCount;
+        delete data.roomCount;
+        delete data.states;
+        console.log('dataaaaa: ', data);
     }
 
     handleNameChange(event){
@@ -51,7 +62,7 @@ class LocationForm extends React.Component {
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Create a new location</h1>
-                        <form id="create-location-form">
+                        <form onSubmit={this.handleSubmit} id="create-location-form">
                             <div className="form-floating mb-3">
                                 <input onChange={this.handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
                                 <label htmlFor="name">Name</label>
