@@ -5,15 +5,21 @@ import React from 'react';
 class LocationForm extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {states: []};
+        this.state = {
+            states: [],
+            name: '',
+            roomCount: '',
+            city: ''
+        };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleRoomCountChange = this.handleRoomCountChange.bind(this);
         this.handleCityChange = this.handleCityChange.bind(this);
         this.handleStateChange = this.handleStateChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        
     }
 
-    handleSubmit(event){
+    async handleSubmit(event){
         event.preventDefault();
         //copying the state by utilizing 3 dots
         const data = {...this.state};
@@ -21,6 +27,29 @@ class LocationForm extends React.Component {
         delete data.roomCount;
         delete data.states;
         console.log('dataaaaa: ', data);
+
+        const locationUrl = 'http://localhost:8000/api/locations/';
+        const fetchConfig = {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(locationUrl, fetchConfig);
+        if (response.ok) {
+            const newLocation = await response.json();
+            console.log('newLocation:::', newLocation);
+
+            const cleared = {
+                name: '',
+                roomCount: '',
+                city: '',
+                state: '',
+            };
+            this.setState(cleared);
+            
+        }
     }
 
     handleNameChange(event){
@@ -64,19 +93,19 @@ class LocationForm extends React.Component {
                         <h1>Create a new location</h1>
                         <form onSubmit={this.handleSubmit} id="create-location-form">
                             <div className="form-floating mb-3">
-                                <input onChange={this.handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+                                <input onChange={this.handleNameChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={this.handleRoomCountChange} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
+                                <input onChange={this.handleRoomCountChange} value={this.state.roomCount} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
                                 <label htmlFor="room_count">Room count</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={this.handleCityChange} placeholder="City" required type="text" name="city" id="city" className="form-control"/>
+                                <input onChange={this.handleCityChange} value={this.state.city} placeholder="City" required type="text" name="city" id="city" className="form-control"/>
                                 <label htmlFor="city">City</label>
                             </div>
                             <div className="mb-3">
-                                <select onChange={this.handleStateChange} required id="state" name="state" className="form-select">
+                                <select onChange={this.handleStateChange} value={this.state.state} required id="state" name="state" className="form-select">
                                     <option value="">Choose a state</option>
                                     {this.state.states.map(state => {
                                         return (
