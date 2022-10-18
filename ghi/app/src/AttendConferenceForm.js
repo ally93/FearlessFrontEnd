@@ -68,16 +68,19 @@ class AttendConferenceForm extends React.Component {
       }
     
     render() {
+        // classes uses to display spinner and conference dropdown
         let spinnerClasses = 'd-flex justify-content-center mb-3';
         let dropdownClasses = 'form-select d-none';
-        let submittedClasses = 'alert alert-success d-none mb-0';
-        let formClasses = "";
 
         if (this.state.conferences.length > 0) {
             spinnerClasses = 'd-flex justify-content-center mb-3 d-none';
             dropdownClasses = 'form-select';
         }
 
+        // classes uses to display successful attendee submission message
+        let submittedClasses = 'alert alert-success d-none mb-0';
+        let formClasses = "";
+        
         if (this.state.submitSuccess) {
             submittedClasses = 'alert alert-success mb-0';
             formClasses = "d-none";
