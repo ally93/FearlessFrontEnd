@@ -9,7 +9,8 @@ class AttendConferenceForm extends React.Component {
             conferences: [],
             name: '',
             conference: '',
-            email: ''
+            email: '',
+            submitSuccess: false
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleConferenceChange = this.handleConferenceChange.bind(this);
@@ -22,6 +23,7 @@ class AttendConferenceForm extends React.Component {
         //copying the state by utilizing 3 dots
         const data = {...this.state};
         delete data.conferences;
+        delete data.submitSuccess;
         console.log('dataaaaa: ', data);
 
         const locationUrl = 'http://localhost:8001/api/attendees/';
@@ -36,14 +38,7 @@ class AttendConferenceForm extends React.Component {
         if (response.ok) {
             const newAttendee = await response.json();
             console.log('newAttendee:::', newAttendee);
-
-            const cleared = {
-                name: '',
-                conference: '',
-                email: ''
-            };
-            this.setState(cleared);
-            
+            this.setState({submitSuccess: true})
         }
     }
 
@@ -75,9 +70,17 @@ class AttendConferenceForm extends React.Component {
     render() {
         let spinnerClasses = 'd-flex justify-content-center mb-3';
         let dropdownClasses = 'form-select d-none';
+        let submittedClasses = 'alert alert-success d-none mb-0';
+        let formClasses = "";
+
         if (this.state.conferences.length > 0) {
             spinnerClasses = 'd-flex justify-content-center mb-3 d-none';
             dropdownClasses = 'form-select';
+        }
+
+        if (this.state.submitSuccess) {
+            submittedClasses = 'alert alert-success mb-0';
+            formClasses = "d-none";
         }
 
         return(
@@ -89,7 +92,7 @@ class AttendConferenceForm extends React.Component {
                 <div className="col">
                     <div className="card shadow">
                         <div className="card-body">
-                            <form onSubmit={this.handleSubmit} id="create-attendee-form">
+                            <form onSubmit={this.handleSubmit} className={formClasses} id="create-attendee-form">
                                 <h1 className="card-title">It's Conference Time!</h1>
                                 <p className="mb-3">
                                     Please choose which conference
@@ -131,7 +134,7 @@ class AttendConferenceForm extends React.Component {
                                 </div>
                                 <button className="btn btn-lg btn-primary">I'm going!</button>
                             </form>
-                            <div className="alert alert-success d-none mb-0" id="success-message">
+                            <div className={submittedClasses} id="success-message">
                                 Congratulations! You're all signed up!
                             </div>
                         </div>
