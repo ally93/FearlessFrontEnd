@@ -3,6 +3,10 @@ import React from 'react';
 // we r creating a class here, which can have a state when its created. React takes care of creating the instance of that class for us. All react component class needs a render method
 // render returns the jsx 
 class LocationForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {states: []};
+    }
     async componentDidMount() {
         const url = 'http://localhost:8000/api/states/';
     
@@ -10,17 +14,11 @@ class LocationForm extends React.Component {
     
         if (response.ok) {
           const data = await response.json();
-    
-          const selectTag = document.getElementById('state');
-          for (let state of data.states) {
-            const option = document.createElement('option');
-            option.value = state.abbreviation;
-            option.innerHTML = state.name;
-            selectTag.appendChild(option);
-          }
+          this.setState({states: data.states});
+
         }
       }
-
+    
   
 
 
@@ -45,7 +43,14 @@ class LocationForm extends React.Component {
                             </div>
                             <div className="mb-3">
                                 <select required id="state" name="state" className="form-select">
-                                <option value="">Choose a state</option>
+                                    <option value="">Choose a state</option>
+                                    {this.state.states.map(state => {
+                                        return (
+                                            <option key={state.abbreviation} value={state.abbreviation}>
+                                                {state.name}
+                                            </option>
+                                        );
+                                    })}
                                 </select>
                             </div>
                             <button className="btn btn-primary">Create</button>
