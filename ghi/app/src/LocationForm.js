@@ -6,7 +6,19 @@ class LocationForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {states: []};
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleRoomCount = this.handleRoomCount.bind(this);
     }
+
+    handleNameChange(event){
+        this.setState({name : event.target.value})
+      }
+
+    handleRoomCount(event){
+        this.setState({roomCount: event.target.value})
+    }
+
+
     async componentDidMount() {
         const url = 'http://localhost:8000/api/states/';
     
@@ -19,6 +31,7 @@ class LocationForm extends React.Component {
         }
       }
     
+      
   
 
 
@@ -30,11 +43,11 @@ class LocationForm extends React.Component {
                         <h1>Create a new location</h1>
                         <form id="create-location-form">
                             <div className="form-floating mb-3">
-                                <input placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+                                <input onChange={this.handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
                                 <label htmlFor="name">Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
+                                <input onChange={this.handleRoomCount} placeholder="Room count" required type="number" name="room_count" id="room_count" className="form-control"/>
                                 <label htmlFor="room_count">Room count</label>
                             </div>
                             <div className="form-floating mb-3">

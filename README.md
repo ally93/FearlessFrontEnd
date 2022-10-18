@@ -93,3 +93,11 @@ in LocationForm.js
 
 -can't use hooks with class components. We're doing a class component, so no hooks."
 
+-"What's that event.target thing?" === "The event parameter is the event that occurred. The target property on it is the HTML tag that caused the event. So, in this case, the event.target is the input for the location's name. Then, the value property is the value in the input."
+
+
+eg code :
+        this.handleNameChange = this.handleNameChange.bind(this);
+
+-In JavaScript, if you have an object and you refer to one of its methods like a property, JavaScript forgets what object it came from."
+-if you want to use a method in the class as an event handler, you have to do that 'bind' thing in the constructor
